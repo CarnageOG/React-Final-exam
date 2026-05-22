@@ -1,0 +1,32 @@
+.user_not{
+  max-width: 1440px;
+  margin: 100px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.div_layout{
+  margin-top: 100px;
+}
+
+.div_wrapper{
+  max-width: 1440px;
+  padding: 0 20px;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.div_profile{
+  max-width: 250px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  background-color: #F2F2EF;
+  gap: 12px;
+  padding: 10px;
+}

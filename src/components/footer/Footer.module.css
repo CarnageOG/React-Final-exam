@@ -1,0 +1,26 @@
+.footer_layout{
+    background-color: #EDECEB;
+    width: 100%;
+    border-top: 0.5px solid black;
+}
+
+.footer_wrapper{
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footer_div{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
