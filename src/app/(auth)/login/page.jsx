@@ -15,8 +15,6 @@ const loginSchema = yup.object({
 });
 
 function Page() {
-    const router = useRouter();
-
     const {
         register,
         handleSubmit,
@@ -29,6 +27,7 @@ function Page() {
         },
     });
 
+    const router = useRouter();
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [submitError, setSubmitError] = useState("");
     const [rememberMe, setRememberMe] = useState(false);

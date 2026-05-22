@@ -2,11 +2,21 @@
 
 import { useEffect, useState } from "react";
 import styles from "./page.module.css";
+import { checkUser } from "@/helpers";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
+    const router = useRouter();
     const [cart, setCart] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+
+    useEffect(() => {
+        const existsUser = checkUser();
+        if (!existsUser) {
+            router.push("/login");
+        }
+    }, [router]);
 
     useEffect(() => {
         const getCart = async () => {
