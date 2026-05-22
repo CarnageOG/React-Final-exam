@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -35,6 +34,15 @@ function Page() {
 
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [submitError, setSubmitError] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            router.push("/");
+        }
+    }, []);
 
     const handleLogin = async (data) => {
         setSubmitError("");
@@ -59,6 +67,11 @@ function Page() {
             const result = await response.json();
 
             console.log("Login successful:", result);
+
+            if (rememberMe) {
+                localStorage.setItem("token", result.token);
+            }
+
             router.push("/");
         } catch (error) {
             console.error("Login error:", error);
@@ -100,7 +113,7 @@ function Page() {
                         </p>
                     )}
                 </div>
-                
+
                 {submitError && (
                     <div className={styles.error}>
                         {submitError}
@@ -109,7 +122,15 @@ function Page() {
 
                 <div className={styles.div_login_options}>
                     <div className={styles.rememberMe}>
-                        <input type="checkbox" id="rememberMe" />
+                        <input
+                            className={styles.checkbox}
+                            type="checkbox"
+                            checked={rememberMe}
+                            onChange={(event) =>
+                                setRememberMe(event.target.checked)
+                            }
+                        />
+
                         <label htmlFor="rememberMe">
                             Remember me
                         </label>
@@ -128,7 +149,12 @@ function Page() {
                     </button>
                 </div>
 
-                <button type="submit" className={styles.button}>Log In</button>
+                <button
+                    type="submit"
+                    className={styles.button}
+                >
+                    Log In
+                </button>
             </form>
         </div>
     );

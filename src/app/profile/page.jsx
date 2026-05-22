@@ -1,8 +1,8 @@
 import styles from "./page.module.css"
 
 const page = async () => {
-
-  const res = await fetch("https://fakestoreapi.com/users/3")
+  
+  const res = await fetch("https://fakestoreapi.com/users/1")
   const user = await res.json();
 
   if(!user){
@@ -10,12 +10,6 @@ const page = async () => {
       <div className={styles.user_not}>Profile Not Found</div>
     )
   }
-
-  // if (!res.ok) {
-  //   return (
-  //     <div className={styles.user_not}>Profile Not Found</div>
-  //   )
-  // }
 
   return (
     <div className={styles.div_layout}>

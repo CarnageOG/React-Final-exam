@@ -66,8 +66,8 @@
     cursor: pointer;
 }
 
-.notRegistered {
-    color: #446f80;
+.checkbox{
+    cursor: pointer;
 }
 
 .error {
