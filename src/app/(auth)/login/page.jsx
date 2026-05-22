@@ -1,5 +1,4 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
@@ -8,13 +7,8 @@ import * as yup from "yup";
 import styles from "./page.module.css";
 
 const loginSchema = yup.object({
-    username: yup
-        .string()
-        .required("Username is required"),
-
-    password: yup
-        .string()
-        .required("Password is required"),
+    username: yup.string().required("Username is required"),
+    password: yup.string().required("Password is required"),
 });
 
 function Page() {
@@ -35,17 +29,21 @@ function Page() {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [submitError, setSubmitError] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
 
         if (token) {
             router.push("/");
+        } else {
+            setLoading(false);
         }
-    }, []);
+    }, [router]);
 
     const handleLogin = async (data) => {
         setSubmitError("");
+        setLoading(true);
 
         try {
             const response = await fetch(
@@ -61,12 +59,11 @@ function Page() {
 
             if (!response.ok) {
                 setSubmitError("Invalid username or password");
+                setLoading(false);
                 return;
             }
 
             const result = await response.json();
-
-            console.log("Login successful:", result);
 
             if (rememberMe) {
                 localStorage.setItem("token", result.token);
@@ -76,8 +73,18 @@ function Page() {
         } catch (error) {
             console.error("Login error:", error);
             setSubmitError("Something went wrong");
+        } finally {
+            setLoading(false);
         }
     };
+
+    if (loading) {
+        return (
+            <div className={styles.error_loading}>
+                LOADING
+            </div>
+        );
+    }
 
     return (
         <div className={styles.main}>
@@ -149,12 +156,7 @@ function Page() {
                     </button>
                 </div>
 
-                <button
-                    type="submit"
-                    className={styles.button}
-                >
-                    Log In
-                </button>
+                <button type="submit" className={styles.button}>Log In</button>
             </form>
         </div>
     );
