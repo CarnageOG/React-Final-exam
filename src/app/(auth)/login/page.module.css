@@ -31,6 +31,7 @@
     font-size: 14px;
     border-radius: 8px;
     border: transparent;
+    font-family: var(--font-oswald);
 }
 
 .div_login_options{
@@ -79,5 +80,4 @@
 
 .error {
     color: red;
-    margin: 10px 0px;
 }
