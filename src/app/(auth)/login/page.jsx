@@ -100,12 +100,6 @@ function Page() {
                     )}
                 </div>
 
-                {submitError && (
-                    <div className={styles.error}>
-                        {submitError}
-                    </div>
-                )}
-
                 <div className={styles.div_login_options}>
                     <div className={styles.rememberMe}>
                         <input type="checkbox" id="rememberMe" />
@@ -127,21 +121,7 @@ function Page() {
                     </button>
                 </div>
 
-                <div className={styles.div_button}>
-                    <button
-                        type="submit"
-                        className={styles.button}
-                    >
-                        Log In
-                    </button>
-
-                    <Link
-                        href="/register"
-                        className={styles.notRegistered}
-                    >
-                        Don't have an account? Register
-                    </Link>
-                </div>
+                <button type="submit" className={styles.button}>Log In</button>
             </form>
         </div>
     );
