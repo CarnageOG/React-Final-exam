@@ -68,7 +68,6 @@ function Page() {
             if (rememberMe) {
                 localStorage.setItem("token", result.token);
             }
-
             router.push("/");
         } catch (error) {
             console.error("Login error:", error);
@@ -88,10 +87,8 @@ function Page() {
 
     return (
         <div className={styles.main}>
-            <form
-                className={styles.container}
-                onSubmit={handleSubmit(handleLogin)}
-            >
+            <form className={styles.container} onSubmit={handleSubmit(handleLogin)}>
+
                 <h3 className={styles.signin}>Sign In</h3>
 
                 <div className={styles.div_inputs}>
@@ -122,9 +119,9 @@ function Page() {
                 </div>
 
                 {submitError && (
-                    <div className={styles.error}>
+                    <p className={styles.error}>
                         {submitError}
-                    </div>
+                    </p>
                 )}
 
                 <div className={styles.div_login_options}>
@@ -133,30 +130,22 @@ function Page() {
                             className={styles.checkbox}
                             type="checkbox"
                             checked={rememberMe}
-                            onChange={(event) =>
-                                setRememberMe(event.target.checked)
-                            }
+                            onChange={(event) => setRememberMe(event.target.checked)}
                         />
-
-                        <label htmlFor="rememberMe">
-                            Remember me
-                        </label>
+                        <label htmlFor="rememberMe">Remember me</label>
                     </div>
 
                     <button
                         className={styles.seePassword}
                         type="button"
-                        onClick={() =>
-                            setPasswordVisible(!passwordVisible)
-                        }
+                        onClick={() =>setPasswordVisible(!passwordVisible)}
                     >
-                        {passwordVisible
-                            ? "Hide password"
-                            : "See password"}
+                        {passwordVisible ? "Hide password" : "See password"}
                     </button>
                 </div>
 
                 <button type="submit" className={styles.button} > Log In </button>
+
             </form>
         </div>
     );
