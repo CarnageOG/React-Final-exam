@@ -27,6 +27,10 @@ function Page() {
         formState: { errors },
     } = useForm({
         resolver: yupResolver(loginSchema),
+        defaultValues: {
+            username: "johnd",
+            password: "m38rmF$",
+        },
     });
 
     const [passwordVisible, setPasswordVisible] = useState(false);
