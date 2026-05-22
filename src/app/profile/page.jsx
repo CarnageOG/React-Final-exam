@@ -1,14 +1,44 @@
-import styles from "./page.module.css"
+"use client";
 
-const page = async () => {
-  
-  const res = await fetch("https://fakestoreapi.com/users/1")
-  const user = await res.json();
+import styles from "./page.module.css";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { checkUser } from "@/helpers";
 
-  if(!user){
-    return(
-      <div className={styles.user_not}>Profile Not Found</div>
-    )
+function Page() {
+  const router = useRouter();
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const existsUser = checkUser();
+    if (!existsUser) {
+      router.push("/login");
+      return;
+    }
+
+    const fetchUser = async () => {
+      try {
+        const res = await fetch("https://fakestoreapi.com/users/1");
+        const data = await res.json();
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchUser();
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div className={styles.error_loading}>LOADING</div>
+    );
+  }
+
+  if (!user) {
+    return <div className={styles.user_not}>Profile Not Found</div>;
   }
 
   return (
@@ -22,13 +52,13 @@ const page = async () => {
         </div>
         <div className={styles.div_profile}>
           <h2>Address</h2>
-          <p>City: {user.address.city};</p>
-          <p>Street: {user.address.street} {user.address.number};</p>
-          <p>Zipcode: {user.address.zipcode};</p>
+          <p>City: {user.address.city}</p>
+          <p>Street: {user.address.street} {user.address.number}</p>
+          <p>Zipcode: {user.address.zipcode}</p>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default page;
+export default Page;

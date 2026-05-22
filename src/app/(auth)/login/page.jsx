@@ -1,9 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+
+import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { checkUser } from "@/helpers";
 import styles from "./page.module.css";
 
 const loginSchema = yup.object({
@@ -29,17 +32,14 @@ function Page() {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [submitError, setSubmitError] = useState("");
     const [rememberMe, setRememberMe] = useState(false);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
+        const existsUser = checkUser();
+        if (existsUser) {
             router.push("/");
-        } else {
-            setLoading(false);
         }
-    }, [router]);
+    }, []);
 
     const handleLogin = async (data) => {
         setSubmitError("");
@@ -156,7 +156,7 @@ function Page() {
                     </button>
                 </div>
 
-                <button type="submit" className={styles.button}>Log In</button>
+                <button type="submit" className={styles.button} > Log In </button>
             </form>
         </div>
     );

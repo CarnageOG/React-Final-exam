@@ -30,3 +30,8 @@
   gap: 12px;
   padding: 10px;
 }
+
+.error_loading{
+  text-align: center;
+  margin: 100px 0;
+}
