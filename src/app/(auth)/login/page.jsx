@@ -51,14 +51,15 @@ function Page() {
                 }
             );
 
+            if (!response.ok) {
+                setSubmitError("Invalid username or password");
+                return;
+            }
+
             const result = await response.json();
 
-            if (result?.token) {
-                console.log("Login successful:", result);
-                router.push("/");
-            } else {
-                setSubmitError("Invalid username or password");
-            }
+            console.log("Login successful:", result);
+            router.push("/");
         } catch (error) {
             console.error("Login error:", error);
             setSubmitError("Something went wrong");
@@ -99,6 +100,12 @@ function Page() {
                         </p>
                     )}
                 </div>
+                
+                {submitError && (
+                    <div className={styles.error}>
+                        {submitError}
+                    </div>
+                )}
 
                 <div className={styles.div_login_options}>
                     <div className={styles.rememberMe}>
