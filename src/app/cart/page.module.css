@@ -61,7 +61,7 @@
   align-items: center;
   justify-content: center;
   gap: 10px;
-  max-width: 80px;
+  max-width: 120px;
   width: 100%;
 }
 
@@ -75,18 +75,20 @@
 }
 
 .cart_button{
-  padding: 8px;
   cursor: pointer;
   background-color: transparent;
-  border: 1px solid #444;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
 }
 
 .cart_button:hover{
-  border: 1px solid #FFFFFF;
-  color: #FFFFFF;
-  background-color: black;
+  border: 1px solid #070D0D;
 }
 
 .div_sum{

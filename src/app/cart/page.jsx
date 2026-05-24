@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Image from "next/image";
 import styles from "./page.module.css";
 import { checkUser } from "@/helpers";
 import { useRouter } from "next/navigation";
@@ -52,14 +53,18 @@ const Page = () => {
                                     <h3 className={styles.cart_h3}>{item.title}</h3>
                                 </div>
                                 <div className={styles.div_quan}>
-                                    <button className={styles.cart_button} onClick={() => handleIncrease(item)}>+</button>
+                                    <button className={styles.cart_button} onClick={() => handleIncrease(item)}>
+                                        <Image src="/plus.svg" alt="plus" width={20} height={20} />
+                                    </button>
                                     <p>{item.quantity}</p>
-                                    <button className={styles.cart_button} onClick={() => handleDecrease(item)}>-</button>
+                                    <button className={styles.cart_button} onClick={() => handleDecrease(item)}>
+                                        <Image src="/minus.svg" alt="minus" width={20} height={20} />
+                                    </button>
                                 </div>
                                 <div className={styles.div_price}>
                                     <p>{(item.price * item.quantity).toFixed(2)} $</p>
                                     <button className={styles.cart_button} onClick={() => handleDelete(item)}>
-                                        DELETE
+                                        <Image src="/bin.svg" alt="delete" width={20} height={20} />
                                     </button>
                                 </div>
                             </div>
