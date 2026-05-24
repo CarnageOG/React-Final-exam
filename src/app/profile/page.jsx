@@ -10,6 +10,11 @@ import { updateUser, deleteUser } from "@/lib/slices/userSlice";
 function Page() {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const handleLogout = () => {
+    dispatch(deleteUser());
+    localStorage.removeItem("token");
+    router.push("/");
+  };
   const user = useAppSelector((state) => state.user.user);
   console.log(user);
   const [loading, setLoading] = useState(true);
@@ -62,7 +67,7 @@ function Page() {
           <p>Street: {user.address.street} {user.address.number}</p>
           <p>Zipcode: {user.address.zipcode}</p>
         </div>
-        <button className={styles.button_out} onClick={() => {dispatch(deleteUser()); router.push("/");}}>
+        <button className={styles.button_out}  onClick={handleLogout}>
           Log Out
         </button>
       </div>
