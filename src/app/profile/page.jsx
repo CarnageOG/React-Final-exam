@@ -62,7 +62,7 @@ function Page() {
           <p>Street: {user.address.street} {user.address.number}</p>
           <p>Zipcode: {user.address.zipcode}</p>
         </div>
-        <button className={styles.button_out} onClick={() => {dispatch(deleteUser()); router.push("/login");}}>
+        <button className={styles.button_out} onClick={() => {dispatch(deleteUser()); router.push("/");}}>
           Log Out
         </button>
       </div>
