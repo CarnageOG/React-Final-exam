@@ -1,4 +1,5 @@
 "use client";
+
 import styles from "./page.module.css";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,13 +24,13 @@ function Page() {
 
   if (loading) {
     return(
-      <div className={styles.error_loading}>Product is Loading...</div>
+      <div className={styles.error_loading}>Product is Loading</div>
     )
   }
 
   if (error) {
     return (
-      <div className={styles.error_loading}>Something went wrong...</div>
+      <div className={styles.error_loading}>Something went wrong</div>
     )
   }
 

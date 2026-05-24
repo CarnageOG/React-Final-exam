@@ -112,3 +112,8 @@
   color: white;
   border-radius: 8px;
 }
+
+.error_loading{
+  text-align: center;
+  margin: 100px 0;
+}

@@ -12,8 +12,10 @@ import { deleteFromCart } from "@/lib/slices/cartSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 const Page = () => {
-    const cartProducts = useAppSelector((state) => state.cart.cartProducts);
+    
+    const { cartProducts, loading, error } = useAppSelector((state) => state.cart);
     console.log(cartProducts);
+
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -39,6 +41,19 @@ const Page = () => {
     const total = cartProducts.reduce((sum, item) => {
         return sum + item.price * item.quantity;
     }, 0);
+
+
+    if (loading) {
+        return (
+            <div className={styles.error_loading}>LOADING</div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className={styles.error_loading}>Something went wrong</div>
+        );
+    }
     
     return (
          <div className={styles.div_layout}>

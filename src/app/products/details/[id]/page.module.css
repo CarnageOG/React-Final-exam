@@ -59,3 +59,8 @@
   background-color: #FFFFFF;
   color: #070d0d;
 }
+
+.error_loading{
+  text-align: center;
+  margin: 100px 0;
+}
