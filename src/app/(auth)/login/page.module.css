@@ -53,6 +53,12 @@
     padding: 5px;
     border-radius: 8px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.seePassword:hover{
+    background-color: #070d0d;
+    color: white;
 }
 
 .button {
@@ -64,6 +70,12 @@
     border: none;
     color: white;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button:hover {
+    background-color: #FFFFFF;
+    color: #070D0D;
 }
 
 .checkbox{

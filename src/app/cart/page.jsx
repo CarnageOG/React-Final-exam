@@ -1,15 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import styles from "./page.module.css";
 import { checkUser } from "@/helpers";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/lib/hooks";
 
 const Page = () => {
+    const cartProducts = useAppSelector((state) => state.cart.cartProducts);
+    console.log(cartProducts);
+
     const router = useRouter();
-    const [cart, setCart] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
 
     useEffect(() => {
         const existsUser = checkUser();
@@ -18,91 +19,30 @@ const Page = () => {
         }
     }, [router]);
 
-    useEffect(() => {
-        const getCart = async () => {
-            try {
-                const res = await fetch("https://fakestoreapi.com/carts/1");
-                const result = await res.json();
-                const productsWithDetails = await Promise.all(
-                    result.products.map(async (item) => {
-                        const res = await fetch(`https://fakestoreapi.com/products/${item.productId}`);
-                        const productData = await res.json();
-                        return {
-                            ...productData,
-                            quantity: item.quantity,
-                        };
-                    })
-                );
-                setCart(productsWithDetails);
-            } catch (error) {
-                setError(true);
-            } finally {
-                setLoading(false);
-            }
-        };
-        getCart();
-    }, []);
-
-    if (loading) {
-        return <div className={styles.error_loading}>LOADING</div>;
-    }
-
-    if (error) {
-        return (
-            <div className={styles.error_loading}>
-                Something went wrong
-            </div>
-        );
-    }
-
-    const increaseQty = (id) => {
-        setCart((prev) =>
-            prev.map((item) =>
-                item.id === id
-                    ? { ...item, quantity: Math.min(item.quantity + 1, 10) }
-                    : item
-            )
-        );
-    };
-
-    const decreaseQty = (id) => {
-        setCart((prev) =>
-            prev.map((item) =>
-                item.id === id
-                    ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
-                    : item
-            )
-        );
-    };
-
-    const deleteItem = (id) => {
-        setCart((prev) => prev.filter((item) => item.id !== id));
-    };
-
-    const total = cart.reduce((sum, item) => {
+    const total = cartProducts.reduce((sum, item) => {
         return sum + item.price * item.quantity;
     }, 0);
-
+    
     return (
-        <div className={styles.div_layout}>
+         <div className={styles.div_layout}>
             <div className={styles.cart_wrapper}>
                 <h1 className={styles.cart_h1}>Shoping cart</h1>
                 <div className={styles.cart_layout}>
                     <div className={styles.div_cart}>
-                        {cart.map((item) => (
+                        {cartProducts.map((item) => (
                             <div className={styles.div_cart_sum} key={item.id}>
                                 <div className={styles.div_product}>
                                     <img src={item.image} alt={item.title} width={50} />
                                     <h3 className={styles.cart_h3}>{item.title}</h3>
                                 </div>
                                 <div className={styles.div_quan}>
-                                    <button className={styles.cart_button} onClick={() => increaseQty(item.id)}>+</button>
+                                    <button className={styles.cart_button}>+</button>
                                     <p>{item.quantity}</p>
-                                    <button className={styles.cart_button} onClick={() => decreaseQty(item.id)}>-</button>
+                                    <button className={styles.cart_button}>-</button>
                                 </div>
                                 <div className={styles.div_price}>
                                     <p>{(item.price * item.quantity).toFixed(2)} $</p>
-                                    <button className={styles.cart_button} onClick={() => deleteItem(item.id)}>DELETE</button>
+                                    <button className={styles.cart_button}>DELETE</button>
                                 </div>
                             </div>
                         ))}
