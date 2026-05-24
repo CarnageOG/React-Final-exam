@@ -4,10 +4,13 @@ import styles from "./page.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { checkUser } from "@/helpers";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { updateUser, deleteUser } from "@/lib/slices/userSlice";
 
 function Page() {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user.user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -21,7 +24,7 @@ function Page() {
       try {
         const res = await fetch("https://fakestoreapi.com/users/1");
         const data = await res.json();
-        setUser(data);
+        dispatch(updateUser(data));
       } catch (error) {
         console.error(error);
       } finally {
@@ -29,7 +32,7 @@ function Page() {
       }
     };
     fetchUser();
-  }, [router]);
+  }, [router, dispatch]);
 
   if (loading) {
     return (
@@ -38,7 +41,9 @@ function Page() {
   }
 
   if (!user) {
-    return <div className={styles.user_not}>Profile Not Found</div>;
+    return (
+      <div className={styles.user_not}>Profile Not Found</div>
+    );
   }
 
   return (
@@ -56,7 +61,9 @@ function Page() {
           <p>Street: {user.address.street} {user.address.number}</p>
           <p>Zipcode: {user.address.zipcode}</p>
         </div>
-        <button className={styles.button_out}>Log Out</button>
+        <button className={styles.button_out} onClick={() => {dispatch(deleteUser()); router.push("/login");}}>
+          Log Out
+        </button>
       </div>
     </div>
   );
