@@ -11,6 +11,7 @@ function Page() {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user.user);
+  console.log(user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
