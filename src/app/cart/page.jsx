@@ -9,13 +9,14 @@ import { useAppSelector } from "@/lib/hooks";
 import { addToCart } from "@/lib/slices/cartSlice";
 import { decreaseQuantity } from "@/lib/slices/cartSlice";
 import { deleteFromCart } from "@/lib/slices/cartSlice";
+import { selectCartTotal } from "@/lib/slices/cartSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
 const Page = () => {
     
     const { cartProducts, loading, error } = useAppSelector((state) => state.cart);
     console.log(cartProducts);
-
+    const total = useAppSelector(selectCartTotal);
     const dispatch = useAppDispatch();
     const router = useRouter();
 
@@ -37,11 +38,6 @@ const Page = () => {
     const handleDelete = (item) => {
         dispatch(deleteFromCart(item));
     };
-
-    const total = cartProducts.reduce((sum, item) => {
-        return sum + item.price * item.quantity;
-    }, 0);
-
 
     if (loading) {
         return (

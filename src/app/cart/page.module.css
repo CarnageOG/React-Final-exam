@@ -24,7 +24,6 @@
 .div_cart{
   display: flex;
   flex-direction: column;
-  border-top: 1px solid #808080;
   max-width: 900px;
   width: 100%;
 }
