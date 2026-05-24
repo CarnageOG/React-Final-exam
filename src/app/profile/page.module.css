@@ -35,3 +35,15 @@
   text-align: center;
   margin: 100px 0;
 }
+
+.button_out{
+  color: #fff;
+  cursor: pointer;
+  background-color: #070d0d;
+  border: none;
+  border-radius: 8px;
+  max-width: 250px;
+  width: 100%;
+  padding: 15px 0;
+  font-size: 16px;
+}

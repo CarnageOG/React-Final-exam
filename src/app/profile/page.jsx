@@ -56,6 +56,7 @@ function Page() {
           <p>Street: {user.address.street} {user.address.number}</p>
           <p>Zipcode: {user.address.zipcode}</p>
         </div>
+        <button className={styles.button_out}>Log Out</button>
       </div>
     </div>
   );

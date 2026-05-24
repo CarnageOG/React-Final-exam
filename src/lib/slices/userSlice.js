@@ -17,6 +17,9 @@ const userSlice = createSlice({
             state.age = action.payload.id;
             state.subscribed = true;
         },
+        deleteUser: (state, action) => {
+            
+        }
     },
 });
 
