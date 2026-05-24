@@ -17,10 +17,11 @@ const cartSlice = createSlice({
         }
     },
     decreaseQuantity: (state, action) => {
-
+        const index = state.cartProducts.findIndex((product) => product.id === action.payload.id);
+        state.cartProducts[index].quantity -= 1;
     },
-    deleteFromCart: (state, action) => {
-
+    deleteFromCart: (state, action) => {    
+        state.cartProducts = state.cartProducts.filter((product) => product.id !== action.payload.id);
     }
   }
 });

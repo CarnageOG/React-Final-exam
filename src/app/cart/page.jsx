@@ -5,11 +5,15 @@ import styles from "./page.module.css";
 import { checkUser } from "@/helpers";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/lib/hooks";
+import { addToCart } from "@/lib/slices/cartSlice";
+import { decreaseQuantity } from "@/lib/slices/cartSlice";
+import { deleteFromCart } from "@/lib/slices/cartSlice";
+import { useAppDispatch } from "@/lib/hooks";
 
 const Page = () => {
     const cartProducts = useAppSelector((state) => state.cart.cartProducts);
     console.log(cartProducts);
-
+    const dispatch = useAppDispatch();
     const router = useRouter();
 
     useEffect(() => {
@@ -18,6 +22,18 @@ const Page = () => {
             router.push("/login");
         }
     }, [router]);
+
+    const handleIncrease = (item) => {
+        dispatch(addToCart(item));
+    };
+
+    const handleDecrease = (item) => {
+        dispatch(decreaseQuantity(item));
+    };
+
+    const handleDelete = (item) => {
+        dispatch(deleteFromCart(item));
+    };
 
     const total = cartProducts.reduce((sum, item) => {
         return sum + item.price * item.quantity;
@@ -36,13 +52,15 @@ const Page = () => {
                                     <h3 className={styles.cart_h3}>{item.title}</h3>
                                 </div>
                                 <div className={styles.div_quan}>
-                                    <button className={styles.cart_button}>+</button>
+                                    <button className={styles.cart_button} onClick={() => handleIncrease(item)}>+</button>
                                     <p>{item.quantity}</p>
-                                    <button className={styles.cart_button}>-</button>
+                                    <button className={styles.cart_button} onClick={() => handleDecrease(item)}>-</button>
                                 </div>
                                 <div className={styles.div_price}>
                                     <p>{(item.price * item.quantity).toFixed(2)} $</p>
-                                    <button className={styles.cart_button}>DELETE</button>
+                                    <button className={styles.cart_button} onClick={() => handleDelete(item)}>
+                                        DELETE
+                                    </button>
                                 </div>
                             </div>
                         ))}
