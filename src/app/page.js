@@ -1,8 +1,13 @@
+"use client";
 import styles from "./page.module.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useAppSelector } from "@/lib/hooks";
 
 export default function Home() {
+  const user = useAppSelector((state) => state.user);
+  console.log(user);
+  
   return (
     <div className={styles.page}>
       <div className={styles.links}>
