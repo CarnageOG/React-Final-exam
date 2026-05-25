@@ -3,16 +3,26 @@
 import styles from "./page.module.css";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { checkUser } from "@/helpers";
+import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/lib/hooks";
 import { addToCart } from "@/lib/slices/cartSlice";
 
 function Page() {
   const { id } = useParams();
+  const router = useRouter();
   const dispatch = useAppDispatch();
-
+  
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const existsUser = checkUser();
+    if (!existsUser) {
+      router.push("/login");
+    }
+  }, [router]);
 
   useEffect(() => {
     fetch(`https://fakestoreapi.com/products/${id}`)
