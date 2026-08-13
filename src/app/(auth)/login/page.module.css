@@ -69,7 +69,7 @@
     padding: 15px 0;
     font-size: 16px;
     background-color: #070D0D;
-    border: none;
+    border: 1px solid #070D0D;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -77,6 +77,7 @@
 
 .button:hover {
     background-color: #FFFFFF;
+
     color: #070D0D;
 }
 

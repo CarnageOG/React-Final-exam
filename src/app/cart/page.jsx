@@ -54,42 +54,49 @@ const Page = () => {
     return (
          <div className={styles.div_layout}>
             <div className={styles.cart_wrapper}>
-                <h1 className={styles.cart_h1}>Shoping cart</h1>
+                <h1 className={styles.cart_h1}>Shopping cart</h1>
                 <div className={styles.cart_layout}>
-                    <div className={styles.div_cart}>
-                        {cartProducts.map((item) => (
-                            <div className={styles.div_cart_sum} key={item.id}>
-                                <div className={styles.div_product}>
-                                    <img src={item.image} alt={item.title} width={50} />
-                                    <h3 className={styles.cart_h3}>{item.title}</h3>
+                    {cartProducts.length === 0 ? (
+                        <div className={styles.empty_cart}>
+                            <Image src="/cart.svg" width={80} height={80} />
+                            <p>The cart is empty</p>
+                        </div>
+                    ) : (
+                        cartProducts.map((item) => (
+                            <div className={styles.div_cart} key={item.id}>
+                                <div className={styles.div_cart_sum}>
+                                    <div className={styles.div_product}>
+                                        <img src={item.image} alt={item.title} width={50} />
+                                        <h3 className={styles.cart_h3}>{item.title}</h3>
+                                    </div>
+                                    <div className={styles.div_quan}>
+                                        <button className={styles.cart_button} onClick={() => handleIncrease(item)}>
+                                            <Image src="/plus.svg" alt="plus" width={20} height={20} />
+                                        </button>
+                                        <p>{item.quantity}</p>
+                                        <button className={styles.cart_button} onClick={() => handleDecrease(item)}>
+                                            <Image src="/minus.svg" alt="minus" width={20} height={20} />
+                                        </button>
+                                    </div>
+                                    <div className={styles.div_price}>
+                                        <p>{(item.price * item.quantity).toFixed(2)} $</p>
+                                        <button className={styles.cart_button} onClick={() => handleDelete(item)}>
+                                            <Image src="/bin.svg" alt="delete" width={20} height={20} />
+                                        </button>
+                                    </div>
                                 </div>
-                                <div className={styles.div_quan}>
-                                    <button className={styles.cart_button} onClick={() => handleIncrease(item)}>
-                                        <Image src="/plus.svg" alt="plus" width={20} height={20} />
-                                    </button>
-                                    <p>{item.quantity}</p>
-                                    <button className={styles.cart_button} onClick={() => handleDecrease(item)}>
-                                        <Image src="/minus.svg" alt="minus" width={20} height={20} />
-                                    </button>
-                                </div>
-                                <div className={styles.div_price}>
-                                    <p>{(item.price * item.quantity).toFixed(2)} $</p>
-                                    <button className={styles.cart_button} onClick={() => handleDelete(item)}>
-                                        <Image src="/bin.svg" alt="delete" width={20} height={20} />
-                                    </button>
+                                <div className={styles.div_sum}>
+                                    <div className={styles.div_total}>
+                                        <h4>Total</h4>
+                                        <p>{total.toFixed(2)} $</p>
+                                    </div>
+                                    <div className={styles.div_buy}>
+                                        BUY
+                                    </div>
                                 </div>
                             </div>
-                        ))}
-                    </div>
-                    <div className={styles.div_sum}>
-                        <div className={styles.div_total}>
-                            <h4>Total</h4>
-                            <p>{total.toFixed(2)} $</p>
-                        </div>
-                        <div className={styles.div_buy}>
-                            BUY
-                        </div>
-                    </div>
+                        ))
+                    )}
                 </div>
             </div>
         </div>

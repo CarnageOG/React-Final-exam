@@ -46,7 +46,7 @@
   color: #fff;
   cursor: pointer;
   background-color: #070d0d;
-  border: none;
+  border: 1px solid #070d0d;
   border-radius: 8px;
   max-width: 250px;
   width: 100%;
@@ -63,4 +63,32 @@
 .error_loading{
   text-align: center;
   margin: 100px 0;
+}
+
+.cart_notification {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -200px);
+  padding: 15px 25px;
+  background: #222;
+  color: white;
+  border-radius: 10px;
+  z-index: 9999;
+  animation: notificationAnimation 1s ease-in-out forwards;
+}
+
+@keyframes notificationAnimation {
+  0% {
+    transform: translate(-50%, -100px);
+  }
+  30% {
+    transform: translate(-50%, 80px);
+  }
+  70% {
+    transform: translate(-50%, 80px);
+  }
+  100% {
+    transform: translate(-50%, -100px);
+  }
 }

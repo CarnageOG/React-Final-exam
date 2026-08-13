@@ -16,6 +16,7 @@ function Page() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [notification, setNotification] = useState(false);
 
   useEffect(() => {
     const existsUser = checkUser();
@@ -46,10 +47,21 @@ function Page() {
 
   const handleAddToCart = () => {
     dispatch(addToCart(product));
+
+    setNotification(true);
+
+    setTimeout(() => {
+      setNotification(false);
+    }, 1000);
   };
 
   return (
     <div className={styles.div_layout}>
+    {notification && (
+      <div className={styles.cart_notification}>
+        Product added to cart!
+      </div>
+    )}
       <div className={styles.div_wrapper}>
         <div className={styles.div_products}>
           <h1 className={styles.product_title}>{product.title}</h1>
