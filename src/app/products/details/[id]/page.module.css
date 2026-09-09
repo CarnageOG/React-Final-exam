@@ -45,8 +45,8 @@
 .button_add_to_cart{
   color: #fff;
   cursor: pointer;
-  background-color: #028a07;
-  border: 1px solid #028a07;
+  background-color: #070d0d;
+  border: 1px solid #070d0d;
   border-radius: 8px;
   max-width: 250px;
   width: 100%;
@@ -57,7 +57,7 @@
 
 .button_add_to_cart:hover{
   background-color: #FFFFFF;
-  color: #028a07;
+  color: #070d0d;
 }
 
 .error_loading{
@@ -71,8 +71,8 @@
   left: 50%;
   transform: translate(-50%, -200px);
   padding: 15px 25px;
-  background: #222;
-  color: white;
+  background: #028a0f;
+  color: #FFFFFF;
   border-radius: 10px;
   z-index: 9999;
   animation: notificationAnimation 1s ease-in-out forwards;

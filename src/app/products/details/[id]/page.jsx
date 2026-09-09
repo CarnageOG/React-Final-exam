@@ -52,7 +52,7 @@ function Page() {
 
     setTimeout(() => {
       setNotification(false);
-    }, 1000);
+    }, 2000);
   };
 
   return (
