@@ -45,8 +45,8 @@
 .button_add_to_cart{
   color: #fff;
   cursor: pointer;
-  background-color: #070d0d;
-  border: 1px solid #070d0d;
+  background-color: #028a07;
+  border: 1px solid #028a07;
   border-radius: 8px;
   max-width: 250px;
   width: 100%;
@@ -57,7 +57,7 @@
 
 .button_add_to_cart:hover{
   background-color: #FFFFFF;
-  color: #070d0d;
+  color: #028a07;
 }
 
 .error_loading{
